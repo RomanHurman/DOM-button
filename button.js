@@ -51,7 +51,6 @@ class Button {
     }
 }
 
-
 const button = new Button({
     width: 300,
     height: 70,
