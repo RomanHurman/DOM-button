@@ -1,9 +1,9 @@
   const newDiv = document.createElement("div");
-    newDiv.id = "new_Div";
-    newDiv.style.display = "flex";
-    newDiv.style.justifyContent = "center";
-    newDiv.style.marginTop = "250px";
-    document.body.prepend(newDiv);
+  newDiv.id = "new_Div";
+  newDiv.style.display = "flex";
+  newDiv.style.justifyContent = "center";
+  newDiv.style.marginTop = "250px";
+  document.body.prepend(newDiv);
 
   class Button {
     constructor(height, width, parentElement){
