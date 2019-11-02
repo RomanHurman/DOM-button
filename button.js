@@ -1,68 +1,62 @@
-const wrapper = document.querySelector('.wrapper');
+  const newDiv = document.createElement("div");
+    newDiv.id = "new_Div";
+    newDiv.style.display = "flex";
+    newDiv.style.justifyContent = "center";
+    newDiv.style.marginTop = "250px";
+    document.body.prepend(newDiv);
 
-class Button {
-    constructor(options) {
-        const {
-            width,
-            height,
-            parentElement = document.body,
-            onClick = () => {}
-    } = options;
-        
-    this.button = document.createElement('button');
-    this.button.innerHTML = 'button';
-    this.button.style.width = `${width}px`;
-    this.button.style.height = `${height}px`;
-    this.button.style.transition = `all .25s`;
-    this.button.style.backgroundColor = 'blue';
-    this.button.style.fontSize ='25px';
-    this.button.style.color = 'white';
-    this.button.style.margin = '21%';
-    this.button.style.borderRadius = '6px';
-    this.button.style.outline = 'none';
-    this.button.style.border = 'none';
-    this.button.style.cursor = 'pointer';
-    
-    this.button.addEventListener('click', (event) => {
-        this.animateButton();
-        onClick(event);
-    })
-    this.appendToElement(parentElement);
-    }
-    animateButton() {
-        this.button.style.transform = 'rotate(180deg)';
-        this.button.style.backgroundColor = 'red';
-        this.button.style.fontSize ='40px';
+  class Button {
+    constructor(height, width, parentElement){
+        this.button = document.createElement("button");
+        this.button.innerText = "Button";
+        parentElement.append(this.button);
         this.button.style.color = 'black';
-        // this.button.style.opacity = "0";
-        setTimeout(() => {
-            this.button.style.transform = 'rotate(360deg)';
-            this.button.style.backgroundColor = 'blue';
-            this.button.style.fontSize ='25px';
-            this.button.style.color = 'white';
-            // this.button.style.opacity = "1";
-        },2000);
+        this.button.style.height = `${height}px`;
+        this.button.style.width = `${width}px`;
+        this.button.addEventListener("mouseenter",() => {
+            this.cursorButton();
+        })
+        this.button.addEventListener("mouseleave",() => {
+            console.log("mouse leave");
+            this.leftButton();
+        })
+        this.button.addEventListener("click", () => {
+            this.clickingButton();
+        })
     }
-    appendToElement(element) {
-        if(!element instanceof HTMLElement) {
-            throw new Error('Element is not instance of HTMLElement');
-        }
-        element.append(this.button);
+
+    cursorButton(){
+        this.button.style.backgroundColor = "#ff0";
+        this.button.style.transition = "height 2s, background-color 2s";
+        this.button.style.fontSize = "20px";
+        this.button.style.color = "aqua";
+    }
+
+    leftButton(){
+        this.button.style.backgroundColor = "silver";
+        this.button.style.borderRadius = "5px";
+        this.button.style.border = "none";
+    }
+
+    clickingButton(){
+        this.button.style.transition = "2s";
+        this.button.style.transform = "rotate(360deg)";
+        setTimeout(() => {
+            this.button.style.borderTop = "3px solid black";
+        }, 1000);
+        setTimeout(() => {
+            this.button.style.borderRight = "3px solid black";
+        }, 2000)
+        setTimeout(() => {
+            this.button.style.borderBottom = "3px solid black";
+        }, 3000);
+        setTimeout(() => {
+            this.button.style.borderLeft = "3px solid black";
+        }, 4000);
+
     }
 }
 
-const button = new Button({
-    width: 300,
-    height: 70,
-    parentElement: wrapper,
-    onClick: function(event) {
-        alert('Wrapper click');
-    }
-});
-const button2 = new Button({
-    width: 200,
-    height: 40,
-    onClick: function(event) {
-        alert('Body click!')
-    }
-});
+  new Button(
+    60, 200, newDiv
+)
